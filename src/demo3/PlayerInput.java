@@ -1,4 +1,4 @@
-package demo2;
+package demo3;
 
 import java2d.game.*;
 import utils.Directions;
@@ -16,6 +16,14 @@ public class PlayerInput extends GameComponent implements GameMouseEvent {
     public double speed = 5.0;
 
     private final Point2D input = new Point2D.Double();
+
+    private final Point2D direction = new Point2D.Double(0, -1);
+
+    private GameScene scene;
+
+    public PlayerInput(GameScene scene) {
+        this.scene = scene;
+    }
 
     @Override
     protected void awake() {
@@ -36,17 +44,25 @@ public class PlayerInput extends GameComponent implements GameMouseEvent {
         GameObject gameObject = getGameObject();
         Transform transform = gameObject.transform;
 
+        if (input.getX() != 0 || input.getY() != 0) {
+            direction.setLocation(input);
+            transform.setLocalRotation(Directions.toRotation(direction) + 90);
+        }
+
         double t = speed * Time.deltaTime * 100;
         transform.translate(Directions.multiple(input, t));
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("mouse pressed");
+        Bullet bullet = new Bullet("assets.sprites/bullet1.png", direction);
+        Transform transform = getGameObject().transform;
+        bullet.transform.setPosition(transform.getPosition());
+        scene.add(bullet);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println("mouse pressed");
+        System.out.println("mouse released");
     }
 }
