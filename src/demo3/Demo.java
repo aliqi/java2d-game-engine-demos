@@ -1,6 +1,7 @@
 package demo3;
 
 import java2d.game.*;
+import utils.Global;
 import utils.Rotator;
 
 import java.awt.*;
@@ -16,6 +17,8 @@ public class Demo {
         Game game = new Game();
         GameScene scene = game.getScene();
         Dimension renderSize = game.getFrame().getRenderSize();
+
+        Global.map.put("game", game);
 
         Transform centerDot = createDot(scene);
         centerDot.setPosition(renderSize.getWidth() * 0.5, renderSize.getHeight() * 0.5);
@@ -41,12 +44,13 @@ public class Demo {
         player.setOrder(1);
 
         Transform transform = player.transform;
-        transform.setPosition(renderSize.getWidth() * 0.2, renderSize.getHeight() * 0.5);
+        transform.setPosition(renderSize.getWidth() * 0.5, renderSize.getHeight() * 0.5);
         transform.setLocalScale(2, 2);
 
         scene.add(player);
 
         player.addComponent(new PlayerInput(scene));
+        player.addComponent(new AutoGun());
         player.addComponent(new Rotator());
 
         return transform;

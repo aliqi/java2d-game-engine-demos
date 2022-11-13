@@ -3,6 +3,7 @@ package demo3;
 import java2d.game.*;
 import utils.Directions;
 import utils.PlayerInputs;
+import utils.Rotator;
 
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -45,6 +46,11 @@ public class PlayerInput extends GameComponent implements GameMouseEvent {
         Transform transform = gameObject.transform;
 
         if (input.getX() != 0 || input.getY() != 0) {
+            Rotator rotator = gameObject.getComponent(Rotator.class);
+
+            if (rotator != null)
+                rotator.enabled = false;
+
             direction.setLocation(input);
             transform.setLocalRotation(Directions.toRotation(direction) + 90);
         }
@@ -55,11 +61,10 @@ public class PlayerInput extends GameComponent implements GameMouseEvent {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        Transform transform = getGameObject().transform;
-        Point2D direction = Directions.toDirection(transform.getLocalRotation() - 90);
-        Bullet bullet = new Bullet("assets.sprites/bullet1.png", direction, 0.5);
-        bullet.transform.setPosition(transform.getPosition());
-        scene.add(bullet);
+        AutoGun gun = getGameObject().getComponent(AutoGun.class);
+
+        if (gun != null)
+            gun.enabled = !gun.enabled;
     }
 
     @Override
