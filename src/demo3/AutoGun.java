@@ -27,6 +27,11 @@ public class AutoGun extends GameComponent {
         lastShootTime = interval;
     }
 
+    public AutoGun(boolean enabled) {
+        this();
+        this.enabled = enabled;
+    }
+
     public AutoGun(double interval) {
         this.interval = interval;
         lastShootTime = interval;

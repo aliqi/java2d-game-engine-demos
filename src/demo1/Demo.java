@@ -3,6 +3,7 @@ package demo1;
 import java2d.game.*;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 /**
  * Author:     Zhao Yan
@@ -17,6 +18,19 @@ public class Demo {
 
         Dimension renderSize = game.getFrame().getRenderSize();
         System.out.println("Render size: " + renderSize);
+
+        // Create a line
+        GameObject line = new GameObject();
+        LineRender lineRender = new LineRender();
+        lineRender.points.add(new Point2D.Float());
+        lineRender.points.add(new Point2D.Float(100f, 0));
+        lineRender.color = Color.red;
+        lineRender.stroke = new BasicStroke(10, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+        line.transform.setPosition(100, 100);
+        line.transform.setLocalRotation(30);
+
+        line.addComponent(lineRender);
+        game.getScene().add(line);
 
         // Create a square
         SpriteGameObject square = new SpriteGameObject("square",

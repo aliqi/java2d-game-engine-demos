@@ -28,7 +28,7 @@ public class Demo {
         player.add(weapon);
 
         SortGroup sortGroup = new SortGroup();
-        sortGroup.setOrder(1);
+        sortGroup.setRenderOrder(1);
         player.addComponent(sortGroup);
 
         Player playerScript = new Player();

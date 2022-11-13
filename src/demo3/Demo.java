@@ -49,8 +49,18 @@ public class Demo {
 
         scene.add(player);
 
+        Point2D origin = transform.getOrigin();
+
+        LineRender lineRender = new LineRender();
+        lineRender.points.add(origin);
+        lineRender.points.add(new Point2D.Double(origin.getX(), origin.getY() - 20f));
+        lineRender.color = Color.red;
+        lineRender.stroke = new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+        lineRender.setRenderOrder(2);
+
+        player.addComponent(lineRender);
         player.addComponent(new PlayerInput(scene));
-        player.addComponent(new AutoGun());
+        player.addComponent(new AutoGun(false));
         player.addComponent(new Rotator());
 
         return transform;
