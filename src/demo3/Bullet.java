@@ -1,6 +1,7 @@
 package demo3;
 
 import java2d.game.*;
+import utils.DirectionalTranslator;
 import utils.Directions;
 import utils.Lifetime;
 
@@ -10,39 +11,20 @@ import java.awt.geom.Point2D;
  * Author:     Zhao Yan
  * DateTime:   2022/6/7 17:24
  */
-public class Bullet extends GameObject {
+public class Bullet extends SpriteGameObject {
 
-    public Bullet(String spritePath, Point2D direction) {
-        SpriteRender render = new SpriteRender();
-        Sprite sprite = Sprite.load(spritePath);
-        render.sprite = sprite;
-        render.setOrder(2);
-        addComponent(render);
+    public Bullet(String spritePath, Point2D direction, double lifetime) {
+        super("bullet", spritePath, 0, 0.5);
+        setOrder(2);
 
-        DirectionalBulletScript script = new DirectionalBulletScript();
-        script.direction.setLocation(direction);
-        addComponent(script);
+        DirectionalTranslator translator = new DirectionalTranslator();
+        translator.direction.setLocation(direction);
+        addComponent(translator);
 
-        Lifetime lifetime = new Lifetime();
-        lifetime.time = .5;
-        addComponent(lifetime);
+        Lifetime life = new Lifetime();
+        life.time = lifetime;
+        addComponent(life);
 
-        transform.setOrigin(sprite.getWidth() * 0.5, 0);
         transform.setLocalRotation(Directions.toRotation(direction));
-    }
-}
-
-class DirectionalBulletScript extends GameComponent {
-
-    public final Point2D direction = new Point2D.Double();
-
-    public double speed = 1;
-
-    @Override
-    protected void update() {
-        double t = speed * Time.deltaTime * 500;
-        Transform transform = getGameObject().transform;
-        transform.setLocalRotation(Directions.toRotation(direction));
-        transform.translate(Directions.multiple(direction, t));
     }
 }

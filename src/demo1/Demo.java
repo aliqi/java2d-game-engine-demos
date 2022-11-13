@@ -13,35 +13,19 @@ public class Demo {
     public static void main(String[] args) {
 
         // Create game and start it.
-        Game game = new Game();
-        game.getFrame().setTitle("Hello");
-        game.start();
+        Game game = new Game("Hello");
 
         Dimension renderSize = game.getFrame().getRenderSize();
         System.out.println("Render size: " + renderSize);
 
-        // Create scene
-        GameScene scene = new GameScene();
-
         // Create a square
-        createSquare(renderSize, scene);
+        SpriteGameObject square = new SpriteGameObject("square",
+                "classpath:assets/sprites/square.png", 0.5, 0.5);
 
-        game.load(scene);
-    }
+        square.transform.setPosition(
+                renderSize.getWidth() * 0.5,
+                renderSize.getHeight() * 0.5);
 
-    private static void createSquare(Dimension renderSize, GameScene scene) {
-        GameObject square = new GameObject("square");
-
-        // Create SpriteRender
-        SpriteRender spriteRender = new SpriteRender();
-        Sprite sprite = Sprite.load("classpath:assets/sprites/square.png");
-        spriteRender.sprite = sprite;
-
-        square.addComponent(spriteRender);
-        square.transform.setLocalPosition(
-                (renderSize.getWidth() - sprite.getWidth()) * 0.5,
-                (renderSize.getHeight() - sprite.getHeight()) * 0.5);
-
-        scene.add(square);
+        game.getScene().add(square);
     }
 }

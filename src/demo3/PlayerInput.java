@@ -19,7 +19,7 @@ public class PlayerInput extends GameComponent implements GameMouseEvent {
 
     private final Point2D direction = new Point2D.Double(0, -1);
 
-    private GameScene scene;
+    private final GameScene scene;
 
     public PlayerInput(GameScene scene) {
         this.scene = scene;
@@ -55,8 +55,9 @@ public class PlayerInput extends GameComponent implements GameMouseEvent {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        Bullet bullet = new Bullet("assets.sprites/bullet1.png", direction);
         Transform transform = getGameObject().transform;
+        Point2D direction = Directions.toDirection(transform.getLocalRotation() - 90);
+        Bullet bullet = new Bullet("assets.sprites/bullet1.png", direction, 0.5);
         bullet.transform.setPosition(transform.getPosition());
         scene.add(bullet);
     }

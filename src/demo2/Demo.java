@@ -12,57 +12,32 @@ public class Demo {
         Game.debugEnabled = true;
 
         Game game = new Game();
-        game.start();
-
-        GameScene scene = new GameScene();
-
-        createCamera(scene);
+        GameScene scene = game.getScene();
         createPlayer(scene);
-
-        game.load(scene);
     }
 
     private static void createPlayer(GameScene scene) {
-        GameObject player = new GameObject("player");
-        SpriteRender spriteRender = new SpriteRender();
-        spriteRender.sprite = Sprite.load("assets.sprites/superman.png");
-        spriteRender.setOrder(1);
-        player.addComponent(spriteRender);
+        SpriteGameObject player = new SpriteGameObject("player", "assets.sprites/superman.png");
+        player.setOrder(1);
 
-        Player playerScript = new Player();
-        player.addComponent(playerScript);
-
-        GameObject weapon = new GameObject("weapon");
-        spriteRender = new SpriteRender();
-        spriteRender.sprite = Sprite.load("assets.sprites/sword.png");
-        spriteRender.setOrder(2);
-        weapon.addComponent(spriteRender);
-
+        SpriteGameObject weapon = new SpriteGameObject("weapon",
+                "assets.sprites/sword.png", 0, 0.5);
+        weapon.setOrder(2);
         weapon.transform.setLocalPosition(50, 60);
-        weapon.transform.setOrigin(0, 6);
 
         player.add(weapon);
-
-        playerScript.weapon = weapon;
 
         SortGroup sortGroup = new SortGroup();
         sortGroup.setOrder(1);
         player.addComponent(sortGroup);
 
-        scene.add(player);
+        Player playerScript = new Player();
+        playerScript.weapon = weapon;
+        player.addComponent(playerScript);
 
         PlayerInput input = new PlayerInput();
         player.addComponent(input);
-    }
 
-    private static void createCamera(GameScene scene) {
-        GameObject cam = new GameObject("camera");
-        Camera camera = new Camera();
-
-        scene.add(cam);
-        cam.addComponent(camera);
-
-        // Set scene camera
-        scene.setCamera(camera);
+        scene.add(player);
     }
 }

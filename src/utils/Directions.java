@@ -19,6 +19,11 @@ public class Directions {
         return toRotation(direction.getX(), direction.getY());
     }
 
+    public static Point2D toDirection(double angle) {
+        double radians = Math.toRadians(angle);
+        return new Point2D.Double(Math.cos(radians), Math.sin(radians));
+    }
+
     public static Point2D multiple(Point2D p, double v) {
         return new Point2D.Double(p.getX() * v, p.getY() * v);
     }

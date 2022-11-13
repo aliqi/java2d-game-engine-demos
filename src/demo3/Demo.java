@@ -14,11 +14,7 @@ public class Demo {
 
     public static void main(String[] args) {
         Game game = new Game();
-        game.start();
-
-        GameScene scene = new GameScene();
-        game.load(scene);
-
+        GameScene scene = game.getScene();
         Dimension renderSize = game.getFrame().getRenderSize();
 
         Transform centerDot = createDot(scene);
@@ -31,47 +27,27 @@ public class Demo {
     }
 
     private static Transform createDot(GameScene scene) {
-        GameObject dot = new GameObject("dot");
-
-        SpriteRender spriteRender = new SpriteRender();
-        Sprite sprite = Sprite.load("assets.sprites/dot.png");
-        spriteRender.sprite = sprite;
-        spriteRender.setOrder(99);
-        dot.addComponent(spriteRender);
+        SpriteGameObject dot = new SpriteGameObject("dot",
+                "assets.sprites/dot.png", 0.5, 0.5);
+        dot.setOrder(99);
 
         scene.add(dot);
-
-        Transform transform = dot.transform;
-        transform.setOrigin(sprite.getWidth() * 0.5, sprite.getHeight() * 0.5);
-
-        return transform;
+        return dot.transform;
     }
 
     private static Transform createPlayer(Dimension renderSize, GameScene scene) {
-        GameObject player = new GameObject("player");
-
-        SpriteRender spriteRender = new SpriteRender();
-        Sprite sprite = Sprite.load("assets.sprites/spacecraft.png");
-        spriteRender.sprite = sprite;
-        spriteRender.setOrder(1);
-        player.addComponent(spriteRender);
+        SpriteGameObject player = new SpriteGameObject("player",
+                "assets.sprites/spacecraft.png", 0.5, 0.5);
+        player.setOrder(1);
 
         Transform transform = player.transform;
-
-        transform.setOrigin(sprite.getWidth() * 0.5, sprite.getHeight() * 0.5);
-
-        System.out.println(renderSize.getWidth() * 0.5);
-        System.out.println(renderSize.getHeight() * 0.5);
-        transform.setPosition(renderSize.getWidth() * 0.5, renderSize.getHeight() * 0.5);
-        Point2D position = transform.getPosition();
-        System.out.println(position);
-
+        transform.setPosition(renderSize.getWidth() * 0.2, renderSize.getHeight() * 0.5);
         transform.setLocalScale(2, 2);
 
         scene.add(player);
 
         player.addComponent(new PlayerInput(scene));
-//        player.addComponent(new Rotator());
+        player.addComponent(new Rotator());
 
         return transform;
     }
