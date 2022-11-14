@@ -1,9 +1,8 @@
-package demo3;
+package models;
 
 import java2d.game.*;
-import utils.DirectionalTranslator;
-import utils.Directions;
-import utils.Lifetime;
+import components.DirectionalTranslator;
+import components.Lifetime;
 
 import java.awt.geom.Point2D;
 
@@ -15,7 +14,7 @@ public class Bullet extends SpriteGameObject {
 
     public Bullet(String spritePath, Point2D direction, double lifetime) {
         super("bullet", spritePath, 0, 0.5);
-        setOrder(2);
+        setRenderOrder(2);
 
         DirectionalTranslator translator = new DirectionalTranslator();
         translator.direction.setLocation(direction);
@@ -25,6 +24,6 @@ public class Bullet extends SpriteGameObject {
         life.time = lifetime;
         addComponent(life);
 
-        transform.setLocalRotation(Directions.toRotation(direction));
+        transform.setLocalRotation(Maths.toRotation(direction));
     }
 }

@@ -8,12 +8,9 @@ import java.awt.geom.Point2D;
  * Author:     Zhao Yan
  * DateTime:   2022/6/7 17:32
  */
-public class PlayerInputs {
+public interface PlayerInputs {
 
-    private PlayerInputs() {
-    }
-
-    public static void getAxes(Point2D direction) {
+    static void getAxes(Point2D direction) {
         double x = 0, y = 0;
 
         if (Inputs.getKey('w')) y -= 1;

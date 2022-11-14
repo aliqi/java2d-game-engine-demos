@@ -1,5 +1,6 @@
-package utils;
+package components;
 
+import java2d.game.Game;
 import java2d.game.GameComponent;
 import java2d.game.Time;
 
@@ -16,7 +17,7 @@ public class Lifetime extends GameComponent {
     @Override
     protected void destroy() {
         super.destroy();
-        System.out.println("Lifetime over");
+        Game.debug("Lifetime over");
     }
 
     @Override

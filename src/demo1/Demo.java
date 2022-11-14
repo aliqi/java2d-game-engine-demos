@@ -5,10 +5,6 @@ import java2d.game.*;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-/**
- * Author:     Zhao Yan
- * DateTime:   2022/6/6 17:03
- */
 public class Demo {
 
     public static void main(String[] args) {

@@ -1,16 +1,12 @@
 package demo3;
 
 import java2d.game.*;
+import models.Ship;
 import utils.Global;
-import utils.Rotator;
+import components.Rotator;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 
-/**
- * Author:     Zhao Yan
- * DateTime:   2022/6/7 16:03
- */
 public class Demo {
 
     public static void main(String[] args) {
@@ -32,16 +28,15 @@ public class Demo {
     private static Transform createDot(GameScene scene) {
         SpriteGameObject dot = new SpriteGameObject("dot",
                 "assets.sprites/dot.png", 0.5, 0.5);
-        dot.setOrder(99);
+        dot.setRenderOrder(99);
 
         scene.add(dot);
         return dot.transform;
     }
 
     private static Transform createPlayer(Dimension renderSize, GameScene scene) {
-        SpriteGameObject player = new SpriteGameObject("player",
-                "assets.sprites/spacecraft.png", 0.5, 0.5);
-        player.setOrder(1);
+        Ship player = new Ship("player",
+                "assets.sprites/spacecraft.png", 0.5, 0.5, 1);
 
         Transform transform = player.transform;
         transform.setPosition(renderSize.getWidth() * 0.5, renderSize.getHeight() * 0.5);
@@ -49,18 +44,6 @@ public class Demo {
 
         scene.add(player);
 
-        Point2D origin = transform.getOrigin();
-
-        LineRender lineRender = new LineRender();
-        lineRender.points.add(origin);
-        lineRender.points.add(new Point2D.Double(origin.getX(), origin.getY() - 20f));
-        lineRender.color = Color.red;
-        lineRender.stroke = new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
-        lineRender.setRenderOrder(2);
-
-        player.addComponent(lineRender);
-        player.addComponent(new PlayerInput(scene));
-        player.addComponent(new AutoGun(false));
         player.addComponent(new Rotator());
 
         return transform;

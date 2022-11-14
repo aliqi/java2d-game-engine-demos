@@ -1,4 +1,4 @@
-package utils;
+package components;
 
 import java2d.game.GameComponent;
 import java2d.game.Time;

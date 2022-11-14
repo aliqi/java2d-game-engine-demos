@@ -1,10 +1,7 @@
-package demo3;
+package components;
 
-import java2d.game.Game;
-import java2d.game.GameComponent;
-import java2d.game.Time;
-import java2d.game.Transform;
-import utils.Directions;
+import java2d.game.*;
+import models.Bullet;
 import utils.Global;
 
 import java.awt.geom.Point2D;
@@ -45,7 +42,7 @@ public class AutoGun extends GameComponent {
     }
 
     public void shoot() {
-        Point2D direction = Directions.toDirection(ship.getLocalRotation() - 90);
+        Point2D direction = Maths.toDirection(ship.getLocalRotation() - 90);
         Bullet bullet = new Bullet("assets.sprites/bullet1.png", direction, 1);
         bullet.transform.setPosition(ship.getPosition());
         game.getScene().add(bullet);
