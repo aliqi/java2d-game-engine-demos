@@ -6,13 +6,9 @@ import utils.Global;
 
 import java.awt.geom.Point2D;
 
-/**
- * Author: ZhaoYan
- * Created: 2022/11/13 14:48
- */
 public class AutoGun extends GameComponent {
 
-    public double interval = 0.1;
+    public double interval = .2;
 
     private double lastShootTime;
 

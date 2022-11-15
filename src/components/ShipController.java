@@ -14,6 +14,10 @@ public class ShipController extends GameComponent implements GameMouseEvent {
 
     public double speed = 5.0;
 
+    public boolean verticalEnabled = true;
+
+    public boolean rotateEnabled = true;
+
     private final Point2D input = new Point2D.Double();
 
     private final Point2D direction = new Point2D.Double(0, -1);
@@ -40,6 +44,10 @@ public class ShipController extends GameComponent implements GameMouseEvent {
         GameObject gameObject = getGameObject();
         Transform transform = gameObject.transform;
 
+        if (!verticalEnabled) {
+            input.setLocation(input.getX(), 0);
+        }
+
         if (input.getX() != 0 || input.getY() != 0) {
             Rotator rotator = gameObject.getComponent(Rotator.class);
 
@@ -47,7 +55,9 @@ public class ShipController extends GameComponent implements GameMouseEvent {
                 rotator.enabled = false;
 
             direction.setLocation(input);
-            transform.setLocalRotation(Maths.toRotation(direction) + 90);
+
+            if (rotateEnabled)
+                transform.setLocalRotation(Maths.toRotation(direction) + 90);
         }
 
         double t = speed * Time.deltaTime * 100;
