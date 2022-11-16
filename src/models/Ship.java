@@ -4,6 +4,7 @@ import components.AutoGun;
 import components.CircleCollider;
 import components.HP;
 import components.ShipController;
+import java2d.game.Game;
 import java2d.game.LineRender;
 import java2d.game.SortGroup;
 import java2d.game.SpriteGameObject;
@@ -11,7 +12,7 @@ import java2d.game.SpriteGameObject;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCollider.CollideEnterEvent {
+public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCollider.CollideEnterEvent, CircleCollider.CollideExitEvent {
 
     public Ship(String name) {
         this(name, 0);
@@ -31,27 +32,30 @@ public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCol
 
         setRenderOrder(1);
 
-        Point2D origin = transform.getOrigin();
-
         LineRender lineRender = new LineRender();
-        lineRender.points.add(origin);
-        lineRender.points.add(new Point2D.Double(origin.getX(), origin.getY() - 20f));
+        lineRender.points.add(new Point2D.Double());
+        lineRender.points.add(new Point2D.Double(0, -20d));
         lineRender.color = Color.red;
-        lineRender.stroke = new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+        lineRender.stroke = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
         lineRender.setRenderOrder(2);
+        lineRender.visible = Game.debugEnabled;
 
         SortGroup sortGroup = new SortGroup();
         sortGroup.setRenderOrder(renderOrder);
 
         CircleCollider circleCollider = new CircleCollider();
-        circleCollider.radius = 40;
+        circleCollider.radius = 20;
         circleCollider.collideEnterEvent = this;
+        circleCollider.collideExitEvent = this;
+        circleCollider.visible = Game.debugEnabled;
 
         addComponent(lineRender);
         addComponent(sortGroup);
         addComponent(new ShipController());
         addComponent(new AutoGun(false));
         addComponent(circleCollider);
+
+        transform.setLocalScale(2, 2);
 
         tag = "player";
     }
@@ -69,7 +73,14 @@ public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCol
 
     @Override
     public void collideEnter(CircleCollider other) {
+        other.color = Color.red;
+
         if (other.getGameObject().compareTag("enemy"))
             die();
+    }
+
+    @Override
+    public void collideExit(CircleCollider other) {
+        other.color = Color.green;
     }
 }

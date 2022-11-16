@@ -8,7 +8,7 @@ import java.awt.geom.Point2D;
 
 public class AutoGun extends GameComponent {
 
-    public double interval = .2;
+    public double interval = 0.2;
 
     private double lastShootTime;
 

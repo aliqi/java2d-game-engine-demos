@@ -1,11 +1,11 @@
 package demo4;
 
-import components.Enemy;
+import components.EnemySpawner;
 import components.ShipController;
 import java2d.game.Game;
 import java2d.game.GameObject;
 import java2d.game.GameScene;
-import components.EnemySpawner;
+import models.Enemy;
 import models.Ship;
 import utils.Global;
 
@@ -25,7 +25,6 @@ public class Demo {
         // Create ship
         Ship ship = new Ship("player",
                 new Point2D.Double(renderSize.getWidth() * 0.5, renderSize.getHeight() - 100));
-        ship.transform.setLocalScale(2, 2);
         ShipController shipController = ship.getComponent(ShipController.class);
         shipController.verticalEnabled = false;
         shipController.rotateEnabled = false;
@@ -33,7 +32,7 @@ public class Demo {
 
         // Create enemy
         Enemy enemy = new Enemy("enemy",
-                new Point2D.Double(renderSize.getWidth() * 0.5, 100));
+                new Point2D.Double(renderSize.getWidth() * 0.5, 400));
         scene.add(enemy);
 
         // Create spawner
@@ -43,6 +42,6 @@ public class Demo {
         scene.add(spawner);
 
         // Control the spawner
-//        spawner.enabled = false;
+        spawner.enabled = true;
     }
 }

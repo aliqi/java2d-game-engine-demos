@@ -10,7 +10,7 @@ import java.awt.geom.Point2D;
  */
 public interface PlayerInputs {
 
-    static void getAxes(Point2D direction) {
+    static void setAxes(Point2D direction) {
         double x = 0, y = 0;
 
         if (Inputs.getKey('w')) y -= 1;

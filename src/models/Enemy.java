@@ -1,7 +1,10 @@
-package components;
+package models;
 
+import components.CircleCollider;
+import components.DirectionalTranslator;
+import components.HP;
+import java2d.game.Game;
 import java2d.game.SpriteGameObject;
-import models.Explosion;
 
 import java.awt.geom.Point2D;
 import java.util.Random;
@@ -29,6 +32,7 @@ public class Enemy extends SpriteGameObject implements HP.ValueChanged {
         CircleCollider circleCollider = new CircleCollider();
         circleCollider.radius = 30;
         circleCollider.offset.setLocation(0, -40);
+        circleCollider.visible = Game.debugEnabled;
 
         addComponent(circleCollider);
         addHpComponent();

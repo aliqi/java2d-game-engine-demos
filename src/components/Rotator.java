@@ -4,10 +4,6 @@ import java2d.game.GameComponent;
 import java2d.game.Time;
 import java2d.game.Transform;
 
-/**
- * Author:     Zhao Yan
- * DateTime:   2022/6/8 15:00
- */
 public class Rotator extends GameComponent {
 
     public Transform target;

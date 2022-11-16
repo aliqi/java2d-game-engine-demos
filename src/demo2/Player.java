@@ -47,7 +47,7 @@ public class Player extends GameComponent {
 
         weapon.transform.setLocalRotation(rotation);
 
-        PlayerInputs.getAxes(input);
+        PlayerInputs.setAxes(input);
 
         double t = speed * Time.deltaTime * 100;
         transform.translate(Maths.multiple(input, t));

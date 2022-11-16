@@ -1,18 +1,15 @@
 package components;
 
 import java2d.game.*;
+import models.Dot;
 import utils.PlayerInputs;
 
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
-/**
- * Author:     Zhao Yan
- * DateTime:   2022/6/6 17:40
- */
 public class ShipController extends GameComponent implements GameMouseEvent {
 
-    public double speed = 5.0;
+    public double speed = 2.0;
 
     public boolean verticalEnabled = true;
 
@@ -29,6 +26,11 @@ public class ShipController extends GameComponent implements GameMouseEvent {
     protected void awake() {
         super.awake();
         Inputs.addMouseEventListener(this);
+
+        Dot dot = new Dot();
+        getGameObject().add(dot);
+        System.out.println(dot.transform.getPosition());
+        System.out.println(getGameObject().transform.getPosition());
     }
 
     @Override
@@ -39,7 +41,8 @@ public class ShipController extends GameComponent implements GameMouseEvent {
 
     @Override
     protected void update() {
-        PlayerInputs.getAxes(input);
+        PlayerInputs.setAxes(input);
+        Maths.normalize(input);
 
         GameObject gameObject = getGameObject();
         Transform transform = gameObject.transform;

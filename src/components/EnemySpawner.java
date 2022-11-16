@@ -1,6 +1,10 @@
 package components;
 
-import java2d.game.*;
+import java2d.game.Game;
+import java2d.game.GameComponent;
+import java2d.game.GameScene;
+import java2d.game.Time;
+import models.Enemy;
 import utils.Global;
 
 import java.util.Random;
