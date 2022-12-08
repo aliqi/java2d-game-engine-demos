@@ -1,16 +1,16 @@
 package demo1;
 
-import java2d.game.Game;
-import java2d.game.GameObject;
-import java2d.game.LineRender;
-import java2d.game.SpriteGameObject;
+import java2d.game.*;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.io.IOException;
 
 public class Demo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FontFormatException {
 
         // Create game and start it.
         Game game = new Game("Hello");
@@ -41,5 +41,31 @@ public class Demo {
                 renderSize.getHeight() * 0.5);
 
         game.getScene().add(square);
+
+        // Create string
+        StringGameObject text = new StringGameObject("你好", Color.white);
+        game.getScene().add(text);
+
+        // Create string with font
+        StringGameObject fontText = new StringGameObject("你好", Color.green);
+        Font font = new Font("楷体", Font.PLAIN, 30);
+        fontText.setFont(font);
+        fontText.transform.setPosition(0, 50);
+        game.getScene().add(fontText);
+
+        // Add Button
+        Button button = new Button("Click");
+        button.setLocation(100, 50);
+        button.setSize(50, 20);
+        button.setBackground(Color.gray);
+        button.setForeground(Color.white);
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                fontText.setText("Random: " + Math.random());
+            }
+        });
+
+        game.getFrame().add(button);
     }
 }
