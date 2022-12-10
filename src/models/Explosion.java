@@ -1,9 +1,6 @@
 package models;
 
-import java2d.game.FrameAnimation;
-import java2d.game.Game;
-import java2d.game.Sprite;
-import java2d.game.SpriteGameObject;
+import java2d.game.*;
 import utils.Global;
 
 import java.awt.geom.Point2D;
@@ -11,6 +8,26 @@ import java.awt.geom.Point2D;
 public class Explosion extends SpriteGameObject implements FrameAnimation.CompletedEvent {
 
     private static final String basePath = "assets.sprites/explosion/";
+
+    private static final SpriteFrames MEMORY_FRAMES;
+
+    private static final SpriteFrames DESC_FRAMES;
+
+    static {
+        // MEMORY FRAMES
+        int length = 5;
+        SpriteFrame[] fs = new SpriteFrame[length];
+
+        for (int i = 0; i < length; i++)
+            fs[i] = new SpriteFrame(i, Sprite.load(basePath + "explosion-" + (i + 1) + ".png"));
+
+        MEMORY_FRAMES = new SpriteFrames(fs);
+
+        // -----------------------
+
+        // LOADED FRAMES
+        DESC_FRAMES = SpriteFrames.load("assets.sprites/explosion/explosion.ani");
+    }
 
     public Explosion() {
         this(basePath + "explosion-1.png");
@@ -20,19 +37,16 @@ public class Explosion extends SpriteGameObject implements FrameAnimation.Comple
         super(spritePath, 0.5, 0.5);
         transform.setLocalScale(2, 2);
         FrameAnimation animation = addAnimationComponent();
-        animation.play();
+//        animation.play();
+        animation.play(0.1f);
     }
 
     private FrameAnimation addAnimationComponent() {
-        int length = 5;
         FrameAnimation animation = new FrameAnimation();
-        animation.frames = new Sprite[length];
-        animation.frames[0] = getSprite();
         animation.loop = false;
         animation.completed = this;
-
-        for (int i = 1; i < length; i++)
-            animation.frames[i] = Sprite.load(basePath + "explosion-" + (i + 1) + ".png");
+//        animation.frames = MEMORY_FRAMES;
+        animation.frames = DESC_FRAMES;
 
         addComponent(animation);
         return animation;
