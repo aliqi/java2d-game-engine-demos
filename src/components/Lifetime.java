@@ -10,6 +10,13 @@ public class Lifetime extends GameComponent {
 
     private double awakeTime;
 
+    public Lifetime() {
+    }
+
+    public Lifetime(double time) {
+        this.time = time;
+    }
+
     @Override
     protected void destroy() {
         super.destroy();

@@ -11,26 +11,51 @@ import java2d.game.SpriteGameObject;
 
 import java.awt.geom.Point2D;
 
-public class Bullet extends SpriteGameObject implements CircleCollider.CollideEnterEvent, CircleCollider.CollidingEvent, CircleCollider.CollideExitEvent {
+public class Bullet extends SpriteGameObject implements CircleCollider.CollideEnterEvent,
+        CircleCollider.CollidingEvent, CircleCollider.CollideExitEvent, DirectionalTranslator.ReachMaxDistance {
 
     public int damage = 10;
 
+    public double getSpeed() {
+        DirectionalTranslator translator = getComponent(DirectionalTranslator.class);
+        return translator == null ? 0 : translator.speed;
+    }
+
+    public void setSpeed(double speed) {
+        DirectionalTranslator translator = getComponent(DirectionalTranslator.class);
+
+        if (translator != null)
+            translator.speed = speed;
+    }
+
+    public double getMaxDistance() {
+        DirectionalTranslator translator = getComponent(DirectionalTranslator.class);
+        return translator == null ? 0 : translator.maxDistance;
+    }
+
+    public void setMaxDistance(double maxDistance) {
+        DirectionalTranslator translator = getComponent(DirectionalTranslator.class);
+
+        if (translator != null)
+            translator.maxDistance = maxDistance;
+    }
+
     public Bullet(String spritePath, Point2D direction, double lifetime) {
-        super("bullet", spritePath, 0, 0.5);
+        super("bullet", spritePath, 0.5, 0.5);
         setRenderOrder(2);
 
         DirectionalTranslator translator = new DirectionalTranslator();
-//        translator.speed = .3f;
+        // translator.speed = .3f;
+        translator.reachMaxDistance = this;
         translator.direction.setLocation(direction);
         addComponent(translator);
 
-        Lifetime life = new Lifetime();
-        life.time = lifetime;
-        addComponent(life);
+        if (lifetime > 0)
+            addComponent(new Lifetime(lifetime));
 
         CircleCollider circleCollider = new CircleCollider();
         circleCollider.radius = 20;
-        circleCollider.offset.setLocation(60, 0);
+        circleCollider.offset.setLocation(0, 0);
         circleCollider.collideEnterEvent = this;
         circleCollider.collideExitEvent = this;
         circleCollider.collidingEvent = this;
@@ -39,6 +64,11 @@ public class Bullet extends SpriteGameObject implements CircleCollider.CollideEn
         addComponent(circleCollider);
 
         transform.setLocalRotation(Maths.toRotation(direction));
+    }
+
+    public void fly() {
+        DirectionalTranslator translator = getComponent(DirectionalTranslator.class);
+        translator.begin();
     }
 
     @Override
@@ -60,5 +90,10 @@ public class Bullet extends SpriteGameObject implements CircleCollider.CollideEn
     @Override
     public void colliding(CircleCollider other) {
 //        System.out.println("colliding: " + other.getGameObject().name);
+    }
+
+    @Override
+    public void reached(DirectionalTranslator translator) {
+        destroy();
     }
 }

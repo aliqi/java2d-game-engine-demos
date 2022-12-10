@@ -11,9 +11,13 @@ public class ShipController extends GameComponent implements GameMouseEvent {
 
     public double speed = 2.0;
 
+    public boolean horizontalEnabled = true;
+
     public boolean verticalEnabled = true;
 
     public boolean rotateEnabled = true;
+
+    public boolean shootContinues = true;
 
     private final Point2D input = new Point2D.Double();
 
@@ -47,9 +51,11 @@ public class ShipController extends GameComponent implements GameMouseEvent {
         GameObject gameObject = getGameObject();
         Transform transform = gameObject.transform;
 
-        if (!verticalEnabled) {
+        if (!verticalEnabled)
             input.setLocation(input.getX(), 0);
-        }
+
+        if (!horizontalEnabled)
+            input.setLocation(0, input.getY());
 
         if (input.getX() != 0 || input.getY() != 0) {
             Rotator rotator = gameObject.getComponent(Rotator.class);
@@ -69,14 +75,21 @@ public class ShipController extends GameComponent implements GameMouseEvent {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        AutoGun gun = getGameObject().getComponent(AutoGun.class);
+        if (enabled) {
+            AutoGun gun = getGameObject().getComponent(AutoGun.class);
 
-        if (gun != null)
-            gun.enabled = !gun.enabled;
+            if (gun != null) {
+                if (shootContinues)
+                    gun.enabled = !gun.enabled;
+                else {
+                    gun.enabled = false;
+                    gun.shoot();
+                }
+            }
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println("mouse released");
     }
 }

@@ -10,6 +10,10 @@ public class AutoGun extends GameComponent {
 
     public double interval = 0.2;
 
+    public boolean mouseDistanceLimited = false;
+
+    public double bulletLifetime = 1;
+
     private double lastShootTime;
 
     private Transform ship;
@@ -39,9 +43,20 @@ public class AutoGun extends GameComponent {
 
     public void shoot() {
         Point2D direction = Maths.toDirection(ship.getLocalRotation() - 90);
-        Bullet bullet = new Bullet("assets.sprites/bullet1.png", direction, 1);
+        double lifetime = bulletLifetime;
+
+        if (mouseDistanceLimited)
+            lifetime = 0;
+
+        Bullet bullet = new Bullet("assets.sprites/bullet1.png", direction, lifetime);
         bullet.transform.setPosition(ship.getPosition());
+
         game.getScene().add(bullet);
+
+        if (mouseDistanceLimited)
+            bullet.setMaxDistance(Inputs.getMousePosition().distance(bullet.transform.getPosition()));
+
+        bullet.fly();
     }
 
     @Override

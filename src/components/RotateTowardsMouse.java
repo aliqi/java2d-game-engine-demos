@@ -22,7 +22,10 @@ public class RotateTowardsMouse extends LineRender {
     @Override
     protected void awake() {
         super.awake();
-        stringRender = getComponent(StringRender.class);
+        stringRender = new StringRender();
+        stringRender.setOrigin(0.5, 0.5);
+        stringRender.setRenderOrder(100);
+        getGameObject().addComponent(stringRender);
     }
 
     @Override

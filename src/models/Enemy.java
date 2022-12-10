@@ -45,11 +45,11 @@ public class Enemy extends SpriteGameObject implements HP.ValueChanged {
 
         if (component == null) {
             DirectionalTranslator translator = new DirectionalTranslator();
-            translator.direction = new Point2D.Double(0, 1);
+            translator.direction.setLocation(0, 1);
             translator.speed = 0.1;
             translator.rotateEnabled = false;
-
             addComponent(translator);
+            translator.begin();
         }
     }
 
