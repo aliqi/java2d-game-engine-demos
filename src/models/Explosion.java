@@ -26,7 +26,7 @@ public class Explosion extends SpriteGameObject implements FrameAnimation.Comple
         // -----------------------
 
         // LOADED FRAMES
-        DESC_FRAMES = SpriteFrames.load("assets.sprites/explosion/explosion.ani");
+		DESC_FRAMES = SpriteFrames.load(basePath + "explosion.ani");
     }
 
     public Explosion() {
