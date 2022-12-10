@@ -3,10 +3,7 @@ package demo5;
 import components.MousePosition;
 import components.RotateTowardsMouse;
 import components.ShipController;
-import java2d.game.Game;
-import java2d.game.GameObject;
-import java2d.game.GameScene;
-import java2d.game.StringRender;
+import java2d.game.*;
 import models.Ship;
 import utils.Global;
 
@@ -43,7 +40,11 @@ public class Demo {
 
         GameObject mousePointer = new GameObject();
         mousePointer.addComponent(new MousePosition());
-
         scene.add(mousePointer);
+
+        StringGameObject scores = new StringGameObject("Hello World!!!!", Color.red);
+        scores.transform.setPosition(renderSize.getWidth() * 0.5, 0);
+        scores.setOrigin(0.5, 0);
+        scene.add(scores);
     }
 }
