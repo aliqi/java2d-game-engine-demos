@@ -4,10 +4,7 @@ import components.AutoGun;
 import components.CircleCollider;
 import components.HP;
 import components.ShipController;
-import java2d.game.Game;
-import java2d.game.LineRender;
-import java2d.game.SortGroup;
-import java2d.game.SpriteGameObject;
+import java2d.game.*;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -33,6 +30,7 @@ public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCol
         setRenderOrder(1);
 
         LineRender lineRender = new LineRender();
+        lineRender.space = Space.local;
         lineRender.points.add(new Point2D.Double());
         lineRender.points.add(new Point2D.Double(0, -20d));
         lineRender.color = Color.red;

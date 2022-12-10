@@ -24,6 +24,7 @@ public class Demo {
         line.transform.setLocalRotation(30);
 
         LineRender lineRender = new LineRender();
+        lineRender.space = Space.local;
         lineRender.points.add(new Point2D.Float());
         lineRender.points.add(new Point2D.Float(100f, 0));
         lineRender.color = Color.red;
