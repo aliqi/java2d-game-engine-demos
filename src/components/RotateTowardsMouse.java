@@ -1,6 +1,5 @@
 package components;
 
-import java2d.game.Inputs;
 import java2d.game.LineRender;
 import java2d.game.Maths;
 import java2d.game.StringRender;
@@ -30,7 +29,7 @@ public class RotateTowardsMouse extends LineRender {
 
     @Override
     protected void update() {
-        Point2D mousePosition = Inputs.getMousePosition();
+        Point2D mousePosition = getInputs().getMousePosition();
 
         if (mousePosition != null) {
             Point2D position = getGameObject().transform.getPosition();

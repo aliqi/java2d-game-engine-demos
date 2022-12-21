@@ -1,6 +1,5 @@
 package components;
 
-import java2d.game.Inputs;
 import java2d.game.StringRender;
 import java2d.game.Unique;
 
@@ -16,7 +15,7 @@ public class MousePosition extends StringRender {
 
     @Override
     protected void update() {
-        Point2D mousePosition = Inputs.getMousePosition();
+        Point2D mousePosition = getInputs().getMousePosition();
 
         if (mousePosition != null) {
             text = decimalFormat.format(mousePosition.getX()) + ", " + decimalFormat.format(mousePosition.getY());

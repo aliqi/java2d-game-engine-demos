@@ -19,9 +19,11 @@ public class ShipController extends GameComponent implements GameMouseEvent {
 
     public boolean shootContinues = true;
 
-    private final Point2D input = new Point2D.Double();
+    private final Point2D axes = new Point2D.Double();
 
     private final Point2D direction = new Point2D.Double(0, -1);
+
+    private Inputs inputs;
 
     public ShipController() {
     }
@@ -29,7 +31,9 @@ public class ShipController extends GameComponent implements GameMouseEvent {
     @Override
     protected void awake() {
         super.awake();
-        Inputs.addMouseEventListener(this);
+
+        inputs = getInputs();
+        inputs.addMouseEventListener(this);
 
         Dot dot = new Dot();
         getGameObject().add(dot);
@@ -40,37 +44,37 @@ public class ShipController extends GameComponent implements GameMouseEvent {
     @Override
     protected void destroy() {
         super.destroy();
-        Inputs.removeMouseEventListener(this);
+        inputs.removeMouseEventListener(this);
     }
 
     @Override
     protected void update() {
-        PlayerInputs.setAxes(input);
-        Maths.normalize(input);
+        PlayerInputs.setAxes(inputs, axes);
+        Maths.normalize(axes);
 
         GameObject gameObject = getGameObject();
         Transform transform = gameObject.transform;
 
         if (!verticalEnabled)
-            input.setLocation(input.getX(), 0);
+            axes.setLocation(axes.getX(), 0);
 
         if (!horizontalEnabled)
-            input.setLocation(0, input.getY());
+            axes.setLocation(0, axes.getY());
 
-        if (input.getX() != 0 || input.getY() != 0) {
+        if (axes.getX() != 0 || axes.getY() != 0) {
             Rotator rotator = gameObject.getComponent(Rotator.class);
 
             if (rotator != null)
                 rotator.enabled = false;
 
-            direction.setLocation(input);
+            direction.setLocation(axes);
 
             if (rotateEnabled)
                 transform.setLocalRotation(Maths.toRotation(direction) + 90);
         }
 
         double t = speed * Time.deltaTime * 100;
-        transform.translate(Maths.multiple(input, t));
+        transform.translate(Maths.multiple(axes, t));
     }
 
     @Override

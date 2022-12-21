@@ -1,8 +1,10 @@
 package components;
 
-import java2d.game.*;
+import java2d.game.GameComponent;
+import java2d.game.Maths;
+import java2d.game.Time;
+import java2d.game.Transform;
 import models.Bullet;
-import utils.Global;
 
 import java.awt.geom.Point2D;
 
@@ -17,8 +19,6 @@ public class AutoGun extends GameComponent {
     private double lastShootTime;
 
     private Transform ship;
-
-    private Game game;
 
     public AutoGun() {
         lastShootTime = interval;
@@ -37,7 +37,6 @@ public class AutoGun extends GameComponent {
     @Override
     protected void awake() {
         super.awake();
-        game = (Game) Global.map.get("game");
         ship = getGameObject().transform;
     }
 
@@ -51,10 +50,10 @@ public class AutoGun extends GameComponent {
         Bullet bullet = new Bullet("assets.sprites/bullet1.png", direction, lifetime);
         bullet.transform.setPosition(ship.getPosition());
 
-        game.getScene().add(bullet);
+        getScene().add(bullet);
 
         if (mouseDistanceLimited)
-            bullet.setMaxDistance(Inputs.getMousePosition().distance(bullet.transform.getPosition()));
+            bullet.setMaxDistance(getInputs().getMousePosition().distance(bullet.transform.getPosition()));
 
         bullet.fly();
     }

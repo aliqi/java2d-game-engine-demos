@@ -10,13 +10,13 @@ import java.awt.geom.Point2D;
  */
 public interface PlayerInputs {
 
-    static void setAxes(Point2D direction) {
+    static void setAxes(Inputs inputs, Point2D direction) {
         double x = 0, y = 0;
 
-        if (Inputs.getKey('w')) y -= 1;
-        if (Inputs.getKey('s')) y += 1;
-        if (Inputs.getKey('a')) x -= 1;
-        if (Inputs.getKey('d')) x += 1;
+        if (inputs.getKey('w')) y -= 1;
+        if (inputs.getKey('s')) y += 1;
+        if (inputs.getKey('a')) x -= 1;
+        if (inputs.getKey('d')) x += 1;
 
         direction.setLocation(x, y);
     }

@@ -23,11 +23,14 @@ public class Player extends GameComponent {
 
     private Transform transform;
 
-    private final Point2D input = new Point2D.Double();
+    private final Point2D axes = new Point2D.Double();
+
+    private Inputs inputs;
 
     @Override
     protected void awake() {
         super.awake();
+        inputs = getInputs();
         transform = getGameObject().transform;
     }
 
@@ -47,9 +50,9 @@ public class Player extends GameComponent {
 
         weapon.transform.setLocalRotation(rotation);
 
-        PlayerInputs.setAxes(input);
+        PlayerInputs.setAxes(inputs, axes);
 
         double t = speed * Time.deltaTime * 100;
-        transform.translate(Maths.multiple(input, t));
+        transform.translate(Maths.multiple(axes, t));
     }
 }

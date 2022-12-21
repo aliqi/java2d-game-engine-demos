@@ -5,6 +5,8 @@ import components.ShipController;
 import java2d.game.Game;
 import java2d.game.GameObject;
 import java2d.game.GameScene;
+import java2d.game.Images;
+import java2d.game.ui.Button;
 import models.Enemy;
 import models.Ship;
 import utils.Global;
@@ -45,5 +47,21 @@ public class Demo {
 
         // Control the spawner
         spawner.enabled = true;
+
+        String info = "是否产生敌人：";
+        Button button = new Button(Images.load("assets.sprites/ui/buttons/start_normal.png"));
+        button.pressed = Images.load("assets.sprites/ui/buttons/start_pressed.png");
+        button.hover = Images.load("assets.sprites/ui/buttons/start_hover.png");
+        button.origin.setLocation(0, 1d);
+        button.transform.setPosition(10, scene.ui.getHeight() - 10);
+        button.text.content = info + spawner.enabled;
+        button.text.color = Color.black;
+        button.text.boundsVisible = true;
+        button.text.font = new Font("微软雅黑", Font.PLAIN, 15);
+        button.clickedEvent = b -> {
+            spawner.enabled = !spawner.enabled;
+            b.text.content = info + spawner.enabled;
+        };
+        scene.ui.add(button);
     }
 }
