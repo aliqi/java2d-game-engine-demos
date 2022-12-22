@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 
 public class Explosion extends SpriteGameObject implements FrameAnimation.CompletedEvent {
 
-    private static final String basePath = "assets.sprites/explosion/";
+    private static final String basePath = "assets/animations/explosion/";
 
     private static final SpriteFrames MEMORY_FRAMES;
 

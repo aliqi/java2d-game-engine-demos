@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 public class Dot extends SpriteGameObject {
 
     public Dot() {
-        super("dot", "assets.sprites/dot.png", 0.5, 0.5);
+        super("dot", "assets/sprites/dot.png", 0.5, 0.5);
         setRenderOrder(99);
     }
 

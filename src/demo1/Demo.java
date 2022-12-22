@@ -46,7 +46,7 @@ public class Demo {
         game.getScene().add(square);
 
         SpriteGameObject inner = new SpriteGameObject("square",
-                "assets.sprites/dot.png", 0.5, 0.5);
+                "assets/sprites/dot.png", 0.5, 0.5);
         inner.transform.setLocalScale(4, 4);
 
         square.add(inner);
@@ -94,7 +94,7 @@ public class Demo {
                 innerPanel.getHeight() * 0.5);
         innerPanel.add(text1);
 
-        Picture picture = new Picture(Images.load("assets.sprites/observer.png"));
+        Picture picture = new Picture(Images.load("assets/sprites/observer.png"));
         picture.setSize(150, 100);
         picture.backgroundColor = Color.yellow;
         picture.transform.setPosition(200, 400);
@@ -102,7 +102,7 @@ public class Demo {
         picture.borderColor = Color.green;
         game.getScene().ui.add(picture);
 
-        SpriteGameObject ship = new SpriteGameObject("assets.sprites/observer.png", 0.5, 0.5);
+        SpriteGameObject ship = new SpriteGameObject("assets/sprites/observer.png", 0.5, 0.5);
         ship.transform.setPosition(200, 200);
         ship.transform.setLocalRotation(45);
         game.getScene().add(ship);

@@ -21,7 +21,7 @@ public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCol
     }
 
     public Ship(String name, int renderOrder) {
-        this(name, "assets.sprites/spacecraft.png", 0.5, 0.5, renderOrder);
+        this(name, "assets/sprites/spacecraft.png", 0.5, 0.5, renderOrder);
     }
 
     public Ship(String name, String spritePath, double ratioX, double ratioY, int renderOrder) {

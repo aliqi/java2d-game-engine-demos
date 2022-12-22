@@ -46,9 +46,9 @@ public class Demo {
         spawner.enabled = true;
 
         String info = "是否产生敌人：";
-        Button button = new Button(Images.load("assets.sprites/ui/buttons/start_normal.png"));
-        button.pressed = Images.load("assets.sprites/ui/buttons/start_pressed.png");
-        button.hover = Images.load("assets.sprites/ui/buttons/start_hover.png");
+        Button button = new Button(Images.load("assets/ui/buttons/start_normal.png"));
+        button.pressed = Images.load("assets/ui/buttons/start_pressed.png");
+        button.hover = Images.load("assets/ui/buttons/start_hover.png");
         button.origin.setLocation(0, 1d);
         button.transform.setPosition(10, scene.ui.getHeight() - 10);
         button.text.color = Color.white;

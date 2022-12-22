@@ -39,7 +39,7 @@ public class Demo {
 
     private static Transform createPlayer(Dimension renderSize, GameScene scene) {
         Ship player = new Ship("player",
-                "assets.sprites/spacecraft1.png", 0.5, 0.5, 1);
+                "assets/sprites/spacecraft1.png", 0.5, 0.5, 1);
 
         Transform transform = player.transform;
         transform.setPosition(renderSize.getWidth() * 0.5, renderSize.getHeight() * 0.5);

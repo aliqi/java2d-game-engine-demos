@@ -47,7 +47,7 @@ public class AutoGun extends GameComponent {
         if (mouseDistanceLimited)
             lifetime = 0;
 
-        Bullet bullet = new Bullet("assets.sprites/bullet1.png", direction, lifetime);
+        Bullet bullet = new Bullet("assets/sprites/bullet1.png", direction, lifetime);
         bullet.transform.setPosition(ship.getPosition());
 
         getScene().add(bullet);

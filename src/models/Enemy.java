@@ -22,7 +22,7 @@ public class Enemy extends SpriteGameObject implements HP.ValueChanged {
     }
 
     public Enemy(String name, Point2D position) {
-        this(name, "assets.sprites/observer.png", 0.5, 1, position);
+        this(name, "assets/sprites/observer.png", 0.5, 1, position);
     }
 
     public Enemy(String name, String spritePath, double ratioX, double ratioY, Point2D position) {
