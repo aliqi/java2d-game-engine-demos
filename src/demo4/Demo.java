@@ -2,10 +2,7 @@ package demo4;
 
 import components.EnemySpawner;
 import components.ShipController;
-import java2d.game.Game;
-import java2d.game.GameObject;
-import java2d.game.GameScene;
-import java2d.game.Images;
+import java2d.game.*;
 import java2d.game.ui.Button;
 import models.Enemy;
 import models.Ship;
@@ -54,14 +51,20 @@ public class Demo {
         button.hover = Images.load("assets.sprites/ui/buttons/start_hover.png");
         button.origin.setLocation(0, 1d);
         button.transform.setPosition(10, scene.ui.getHeight() - 10);
+        button.text.color = Color.white;
+        button.text.offset.setLocation(0, -5);
+        button.text.font = new Font("微软雅黑", Font.PLAIN, 16);
         button.text.content = info + spawner.enabled;
-        button.text.color = Color.black;
-        button.text.boundsVisible = true;
-        button.text.font = new Font("微软雅黑", Font.PLAIN, 15);
-        button.clickedEvent = b -> {
+        button.clickedEvent = (b, mouseButton) -> {
             spawner.enabled = !spawner.enabled;
-            b.text.content = info + spawner.enabled;
+            button.text.content = info + spawner.enabled;
         };
         scene.ui.add(button);
+
+        StringGameObject str = new StringGameObject("World Text");
+        str.setFont(new Font("黑体", Font.BOLD, 20));
+        str.getStringRender().boundsVisible = true;
+        str.transform.setPosition(100, 100);
+        scene.add(str);
     }
 }

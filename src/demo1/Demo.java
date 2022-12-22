@@ -53,12 +53,14 @@ public class Demo {
 
         // Create string
         StringGameObject text = new StringGameObject("你好", Color.white);
+        text.getStringRender().boundsVisible = true;
         game.getScene().add(text);
 
         // Create string with font
         StringGameObject fontText = new StringGameObject("你好", Color.green);
         Font font = new Font("楷体", Font.PLAIN, 30);
         fontText.setFont(font);
+        fontText.getStringRender().boundsVisible = true;
         fontText.transform.setPosition(0, 50);
         game.getScene().add(fontText);
 
