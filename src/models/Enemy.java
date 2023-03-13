@@ -64,12 +64,15 @@ public class Enemy extends SpriteGameObject implements HP.ValueChanged {
 
     @Override
     public void changed(int newValue, int oldValue) {
-        if (newValue == 0) {
-            // Die: spawn particles and destroy game object
-            Point2D position = transform.getPosition();
-            position.setLocation(position.getX(), position.getY() - 40);
-            Explosion.explode(position);
-            destroy();
-        }
+        if (newValue == 0)
+            die();
+    }
+
+    public void die() {
+        // Die: spawn particles and destroy game object
+        Point2D position = transform.getPosition();
+        position.setLocation(position.getX(), position.getY() - 40);
+        Explosion.explode(position);
+        destroy();
     }
 }

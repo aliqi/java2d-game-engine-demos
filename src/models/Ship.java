@@ -1,15 +1,16 @@
 package models;
 
-import components.AutoGun;
-import components.CircleCollider;
-import components.HP;
-import components.ShipController;
+import components.*;
 import java2d.game.*;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
 
 public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCollider.CollideEnterEvent, CircleCollider.CollideExitEvent {
+
+    private SpriteBar lifeBar;
+
+    private HP hp;
 
     public Ship(String name) {
         this(name, 0);
@@ -53,13 +54,30 @@ public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCol
         addComponent(new AutoGun(false));
         addComponent(circleCollider);
 
+        lifeBar = new SpriteBar();
+        lifeBar.transform.setLocalPosition(-16.0, 20.0);
+        add(lifeBar);
+
+        addHpComponent();
+
         transform.setLocalScale(2, 2);
 
         tag = "player";
     }
 
+    private void addHpComponent() {
+        hp = new HP();
+        hp.setMaxValue(100);
+        hp.reset();
+        hp.valueChanged = this;
+
+        addComponent(hp);
+    }
+
     @Override
     public void changed(int newValue, int oldValue) {
+        lifeBar.setRatio(hp.getRatio());
+
         if (newValue == 0)
             die();
     }
@@ -73,8 +91,10 @@ public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCol
     public void collideEnter(CircleCollider other) {
         other.color = Color.red;
 
-        if (other.getGameObject().compareTag("enemy"))
-            die();
+        if (other.getGameObject() instanceof Enemy enemy) {
+            hp.setValue(hp.getValue() - 10);
+            enemy.die();
+        }
     }
 
     @Override
