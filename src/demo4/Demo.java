@@ -14,7 +14,7 @@ import java.awt.geom.Point2D;
 public class Demo {
 
     public static void main(String[] args) {
-        // Game.debugEnabled = true;
+         Game.debugEnabled = true;
 
         Game game = new Game("Flight Edu");
         GameScene scene = game.getScene();

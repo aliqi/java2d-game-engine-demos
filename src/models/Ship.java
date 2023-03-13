@@ -8,9 +8,27 @@ import java.awt.geom.Point2D;
 
 public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCollider.CollideEnterEvent, CircleCollider.CollideExitEvent {
 
-    private SpriteBar lifeBar;
+    private final SpriteBar lifeBar;
 
     private HP hp;
+
+    private boolean destroyed;
+
+    public int getMaxHp() {
+        return hp.getMaxValue();
+    }
+
+    public void setMaxHp(int value) {
+        hp.setMaxValue(value);
+    }
+
+    public int getHp() {
+        return hp.getValue();
+    }
+
+    public void setHp(int value) {
+        hp.setValue(value);
+    }
 
     public Ship(String name) {
         this(name, 100, 0);
@@ -86,9 +104,12 @@ public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCol
             die();
     }
 
-    private void die() {
-        Explosion.explode(transform.getPosition());
-        destroy();
+    public void die() {
+        if (!destroyed) {
+            destroyed = true;
+            Explosion.explode(transform.getPosition());
+            destroy();
+        }
     }
 
     @Override
