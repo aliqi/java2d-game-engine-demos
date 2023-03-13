@@ -24,7 +24,7 @@ public class Demo {
         Global.map.put("game", game);
 
         // Create ship
-        Ship ship = new Ship("player",
+        Ship ship = new Ship("player", 100,
                 new Point2D.Double(renderSize.getWidth() * 0.5, renderSize.getHeight() - 100));
         ShipController shipController = ship.getComponent(ShipController.class);
         shipController.verticalEnabled = false;

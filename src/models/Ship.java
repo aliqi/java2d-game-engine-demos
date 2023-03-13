@@ -13,19 +13,23 @@ public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCol
     private HP hp;
 
     public Ship(String name) {
-        this(name, 0);
+        this(name, 100, 0);
     }
 
-    public Ship(String name, Point2D position) {
-        this(name, 0);
+    public Ship(String name, int life) {
+        this(name, life, 0);
+    }
+
+    public Ship(String name, int life, Point2D position) {
+        this(name, life, 0);
         transform.setPosition(position);
     }
 
-    public Ship(String name, int renderOrder) {
-        this(name, "assets/sprites/spacecraft.png", 0.5, 0.5, renderOrder);
+    public Ship(String name, int life, int renderOrder) {
+        this(name, life, "assets/sprites/spacecraft.png", 0.5, 0.5, renderOrder);
     }
 
-    public Ship(String name, String spritePath, double ratioX, double ratioY, int renderOrder) {
+    public Ship(String name, int life, String spritePath, double ratioX, double ratioY, int renderOrder) {
         super(name, spritePath, ratioX, ratioY);
 
         setRenderOrder(1);
@@ -58,16 +62,16 @@ public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCol
         lifeBar.transform.setLocalPosition(-16.0, 20.0);
         add(lifeBar);
 
-        addHpComponent();
+        addHpComponent(life);
 
         transform.setLocalScale(2, 2);
 
         tag = "player";
     }
 
-    private void addHpComponent() {
+    private void addHpComponent(int life) {
         hp = new HP();
-        hp.setMaxValue(100);
+        hp.setMaxValue(life);
         hp.reset();
         hp.valueChanged = this;
 

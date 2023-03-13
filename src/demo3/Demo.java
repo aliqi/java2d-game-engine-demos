@@ -38,7 +38,7 @@ public class Demo {
     }
 
     private static Transform createPlayer(Dimension renderSize, GameScene scene) {
-        Ship player = new Ship("player",
+        Ship player = new Ship("player", 100,
                 "assets/sprites/spacecraft1.png", 0.5, 0.5, 1);
 
         Transform transform = player.transform;
