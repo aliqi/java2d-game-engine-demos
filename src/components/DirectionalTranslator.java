@@ -47,15 +47,11 @@ public class DirectionalTranslator extends GameComponent {
 
         if (beginPosition != null && maxDistance > 0) {
             Point2D position = transform.getPosition();
-            position.setLocation(position.getX() + movement.getX(),
-                    position.getY() + movement.getY());
+            position.setLocation(Maths.add(position, movement));
 
             if (position.distance(beginPosition) >= maxDistance) {
-                Point2D dir = new Point2D.Double(direction.getX(), direction.getY());
-                Maths.normalize(dir);
-                dir = Maths.multiple(dir, maxDistance);
-                position.setLocation(beginPosition.getX() + dir.getX(), beginPosition.getY() + dir.getY());
-                transform.setPosition(position);
+                Point2D dir = Maths.newLength(direction, maxDistance);
+                transform.setPosition(Maths.add(beginPosition, dir));
 
                 if (reachMaxDistance != null)
                     reachMaxDistance.reached(this);
