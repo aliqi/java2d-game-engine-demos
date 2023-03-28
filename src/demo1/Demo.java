@@ -1,5 +1,6 @@
 package demo1;
 
+import components.Rotator;
 import java2d.game.Canvas;
 import java2d.game.*;
 import java2d.game.ui.Panel;
@@ -39,10 +40,6 @@ public class Demo {
         SpriteGameObject square = new SpriteGameObject("square",
                 "classpath:assets/sprites/square.png", 0.5, 0.5);
 
-        square.transform.setPosition(
-                renderSize.getWidth() * 0.5,
-                renderSize.getHeight() * 0.5);
-
         game.getScene().add(square);
 
         SpriteGameObject inner = new SpriteGameObject("square",
@@ -54,6 +51,7 @@ public class Demo {
         // Create string
         StringGameObject text = new StringGameObject("你好", Color.white);
         text.getStringRender().boundsVisible = true;
+        text.transform.setPosition(-100, 100);
         game.getScene().add(text);
 
         // Create string with font
@@ -61,7 +59,7 @@ public class Demo {
         Font font = new Font("楷体", Font.PLAIN, 30);
         fontText.setFont(font);
         fontText.getStringRender().boundsVisible = true;
-        fontText.transform.setPosition(0, 50);
+        fontText.transform.setPosition(0, 100);
         game.getScene().add(fontText);
 
         Canvas ui = game.getScene().ui;
@@ -77,6 +75,7 @@ public class Demo {
         innerPanel.backgroundColor = Color.blue;
         innerPanel.origin.setLocation(0.2, 0.2);
         innerPanel.setSize(new Dimension(150, 150));
+        innerPanel.addComponent(new Rotator());
         panel.add(innerPanel);
 
         var pointPanel = new Panel();
@@ -94,7 +93,7 @@ public class Demo {
                 innerPanel.getHeight() * 0.5);
         innerPanel.add(text1);
 
-        Picture picture = new Picture(Images.load("assets/sprites/observer.png"));
+        Picture picture = new Picture("assets/sprites/observer.png");
         picture.setSize(150, 100);
         picture.backgroundColor = Color.yellow;
         picture.transform.setPosition(200, 400);
@@ -102,7 +101,7 @@ public class Demo {
         picture.borderColor = Color.green;
         game.getScene().ui.add(picture);
 
-        SpriteGameObject ship = new SpriteGameObject("assets/sprites/observer.png", 0.5, 0.5);
+        SpriteGameObject ship = new SpriteGameObject("assets/sprites/observer.png");
         ship.transform.setPosition(200, 200);
         ship.transform.setLocalRotation(45);
         game.getScene().add(ship);

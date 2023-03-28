@@ -2,6 +2,7 @@ package components;
 
 import java2d.game.LineRender;
 import java2d.game.Maths;
+import java2d.game.Space;
 import java2d.game.StringRender;
 
 import java.awt.*;
@@ -9,6 +10,8 @@ import java.awt.geom.Point2D;
 import java.text.DecimalFormat;
 
 public class RotateTowardsMouse extends LineRender {
+
+    public double deltaRotation = 90;
 
     private StringRender stringRender;
 
@@ -29,7 +32,7 @@ public class RotateTowardsMouse extends LineRender {
 
     @Override
     protected void update() {
-        Point2D mousePosition = getInputs().getMousePosition();
+        Point2D mousePosition = getInputs().getWorldMousePosition();
 
         if (mousePosition != null) {
             Point2D position = getGameObject().transform.getPosition();
@@ -39,8 +42,9 @@ public class RotateTowardsMouse extends LineRender {
             Maths.normalize(direction);
             double rotation = Maths.toRotation(direction);
             stringRender.text = decimalFormat.format(rotation);
-            getGameObject().transform.setLocalRotation(rotation + 90);
+            getGameObject().transform.setLocalRotation(rotation + deltaRotation);
 
+            space = Space.world;
             points.clear();
             points.add(position);
             points.add(mousePosition);

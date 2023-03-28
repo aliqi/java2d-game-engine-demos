@@ -1,7 +1,6 @@
 package models;
 
 import java2d.game.*;
-import utils.Global;
 
 import java.awt.geom.Point2D;
 
@@ -57,10 +56,9 @@ public class Explosion extends SpriteGameObject implements FrameAnimation.Comple
         destroy();
     }
 
-    public static void explode(Point2D position) {
+    public static void explode(GameScene scene, Point2D position) {
         Explosion explosion = new Explosion();
         explosion.transform.setPosition(position);
-        Game game = (Game) Global.map.get("game");
-        game.getScene().add(explosion);
+        scene.add(explosion);
     }
 }

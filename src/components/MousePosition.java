@@ -15,7 +15,7 @@ public class MousePosition extends StringRender {
 
     @Override
     protected void update() {
-        Point2D mousePosition = getInputs().getMousePosition();
+        Point2D mousePosition = getInputs().getWorldMousePosition();
 
         if (mousePosition != null) {
             text = decimalFormat.format(mousePosition.getX()) + ", " + decimalFormat.format(mousePosition.getY());

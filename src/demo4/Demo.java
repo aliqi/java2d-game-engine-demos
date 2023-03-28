@@ -6,7 +6,6 @@ import java2d.game.*;
 import java2d.game.ui.Button;
 import models.Enemy;
 import models.Ship;
-import utils.Global;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -14,31 +13,26 @@ import java.awt.geom.Point2D;
 public class Demo {
 
     public static void main(String[] args) {
-         Game.debugEnabled = true;
+        Game.debugEnabled = true;
 
         Game game = new Game("Flight Edu");
         GameScene scene = game.getScene();
-        Dimension renderSize = game.getRenderSize();
-
-        // App-level singleton
-        Global.map.put("game", game);
 
         // Create ship
-        Ship ship = new Ship("player", 100,
-                new Point2D.Double(renderSize.getWidth() * 0.5, renderSize.getHeight() - 100));
+        Ship ship = new Ship("player", 100, new Point2D.Double(0, 200));
         ShipController shipController = ship.getComponent(ShipController.class);
         shipController.verticalEnabled = false;
         shipController.rotateEnabled = false;
         scene.add(ship);
 
         // Create enemy
-        Enemy enemy = new Enemy("enemy",
-                new Point2D.Double(renderSize.getWidth() * 0.5, 400));
+        Enemy enemy = new Enemy("enemy", new Point2D.Double(0, -200));
         scene.add(enemy);
 
         // Create spawner
         GameObject spawner = new GameObject("spawner");
         EnemySpawner enemySpawner = new EnemySpawner();
+        enemySpawner.maxSpawnInterval = 1.0;
         spawner.addComponent(enemySpawner);
         scene.add(spawner);
 
@@ -61,10 +55,9 @@ public class Demo {
         };
         scene.ui.add(button);
 
-        StringGameObject str = new StringGameObject("World Text");
+        StringGameObject str = new StringGameObject("World Text: Flight");
+        str.setOrigin(0.5, 0.5);
         str.setFont(new Font("黑体", Font.BOLD, 20));
-        str.getStringRender().boundsVisible = true;
-        str.transform.setPosition(100, 100);
         scene.add(str);
     }
 }

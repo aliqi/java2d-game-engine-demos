@@ -37,8 +37,6 @@ public class ShipController extends GameComponent implements GameMouseEvent {
 
         Dot dot = new Dot();
         getGameObject().add(dot);
-        System.out.println(dot.transform.getPosition());
-        System.out.println(getGameObject().transform.getPosition());
     }
 
     @Override
@@ -79,7 +77,7 @@ public class ShipController extends GameComponent implements GameMouseEvent {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (enabled) {
+        if (enabled && !getInputs().isOverUI()) {
             AutoGun gun = getGameObject().getComponent(AutoGun.class);
 
             if (gun != null) {

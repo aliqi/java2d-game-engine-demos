@@ -72,7 +72,7 @@ public class Enemy extends SpriteGameObject implements HP.ValueChanged {
         // Die: spawn particles and destroy game object
         Point2D position = transform.getPosition();
         position.setLocation(position.getX(), position.getY() - 40);
-        Explosion.explode(position);
+        Explosion.explode(getScene(), position);
         destroy();
     }
 }

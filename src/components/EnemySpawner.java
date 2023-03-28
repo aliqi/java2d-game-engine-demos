@@ -5,8 +5,8 @@ import java2d.game.GameComponent;
 import java2d.game.GameScene;
 import java2d.game.Time;
 import models.Enemy;
-import utils.Global;
 
+import java.awt.*;
 import java.util.Random;
 
 public class EnemySpawner extends GameComponent {
@@ -27,15 +27,17 @@ public class EnemySpawner extends GameComponent {
     @Override
     protected void awake() {
         super.awake();
-        game = (Game) Global.map.get("game");
-        scene = game.getScene();
+        scene = getScene();
+        game = scene.getGame();
     }
 
     public void spawn() {
         Enemy enemy = new Enemy();
         double padding = 100d;
-        double randomX = random.nextDouble(padding, game.getRenderSize().getWidth() - padding);
-        enemy.transform.setPosition(randomX, -padding);
+        Dimension renderSize = game.getRenderSize();
+        double halfWidth = renderSize.width * 0.5;
+        double randomX = random.nextDouble(-halfWidth + padding, halfWidth - padding);
+        enemy.transform.setPosition(randomX, -renderSize.height * 0.5 - padding);
         enemy.addTranslatorComponent();
         scene.add(enemy);
     }

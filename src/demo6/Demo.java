@@ -12,10 +12,8 @@ public class Demo {
     public static void main(String[] args) {
         Game game = new Game();
         GameScene scene = game.getScene();
-        Dimension renderSize = game.getRenderSize();
 
         RotateGameObject center = new RotateGameObject(1);
-        center.transform.setPosition(renderSize.width * 0.5, renderSize.height * 0.5);
         scene.add(center);
 
         // add a painter

@@ -11,9 +11,7 @@ import java2d.game.SpriteGameObject;
  */
 public class SpriteBar extends GameObject {
 
-    private SpriteGameObject barObj;
-
-    private SpriteGameObject borderObj;
+    private final SpriteGameObject barObj;
 
     public double getRatio() {
         return barObj.transform.getLocalScale().getX();
@@ -32,10 +30,13 @@ public class SpriteBar extends GameObject {
     }
 
     public SpriteBar(Sprite bar, Sprite border) {
-        barObj = new SpriteGameObject(bar);
+        barObj = new SpriteGameObject(bar, 0, 0.5);
         add(barObj);
 
-        borderObj = new SpriteGameObject(border);
+        SpriteGameObject borderObj = new SpriteGameObject(border, 0, 0.5);
         add(borderObj);
+
+        barObj.transform.setLocalPosition(-bar.getWidth() * 0.5, 0);
+        borderObj.transform.setLocalPosition(-border.getWidth() * 0.5, 0);
     }
 }

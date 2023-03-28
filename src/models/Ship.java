@@ -77,7 +77,7 @@ public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCol
         addComponent(circleCollider);
 
         lifeBar = new SpriteBar();
-        lifeBar.transform.setLocalPosition(-16.0, 20.0);
+        lifeBar.transform.setLocalPosition(0, 20.0);
         add(lifeBar);
 
         addHpComponent(life);
@@ -107,7 +107,7 @@ public class Ship extends SpriteGameObject implements HP.ValueChanged, CircleCol
     public void die() {
         if (!destroyed) {
             destroyed = true;
-            Explosion.explode(transform.getPosition());
+            Explosion.explode(getScene(), transform.getPosition());
             destroy();
         }
     }

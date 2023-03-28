@@ -9,7 +9,6 @@ import java2d.game.GameObject;
 import java2d.game.GameScene;
 import java2d.game.StringGameObject;
 import models.Ship;
-import utils.Global;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -22,14 +21,10 @@ public class Demo {
         Game game = new Game("Free Shooter");
         GameScene scene = game.getScene();
         Dimension renderSize = game.getRenderSize();
-        System.out.println("Render size: " + renderSize);
-
-        // App-level singleton
-        Global.map.put("game", game);
 
         // Create ship
         Ship ship = new Ship("player");
-        ship.transform.setPosition(new Point2D.Double(renderSize.getWidth() * 0.5, renderSize.getHeight() - 50));
+        ship.transform.setPosition(0, 250);
         ShipController shipController = ship.getComponent(ShipController.class);
         shipController.horizontalEnabled = false;
         shipController.verticalEnabled = false;
@@ -48,7 +43,7 @@ public class Demo {
         scene.add(mousePointer);
 
         StringGameObject scores = new StringGameObject("Hello World!!!!", Color.red);
-        scores.transform.setPosition(renderSize.getWidth() * 0.5, 0);
+        scores.transform.setPosition(0, -renderSize.height * 0.5);
         scores.setOrigin(0.5, 0);
         scene.add(scores);
     }

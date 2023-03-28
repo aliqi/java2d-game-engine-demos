@@ -22,7 +22,7 @@ public class Demo {
         SpriteGameObject weapon = new SpriteGameObject("weapon",
                 "assets/sprites/sword.png", 0, 0.5);
         weapon.setRenderOrder(2);
-        weapon.transform.setLocalPosition(50, 60);
+        weapon.transform.setLocalPosition(25, 30);
 
         player.add(weapon);
 

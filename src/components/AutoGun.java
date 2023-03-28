@@ -53,7 +53,7 @@ public class AutoGun extends GameComponent {
         getScene().add(bullet);
 
         if (mouseDistanceLimited)
-            bullet.setMaxDistance(getInputs().getMousePosition().distance(bullet.transform.getPosition()));
+            bullet.setMaxDistance(getInputs().getWorldMousePosition().distance(bullet.transform.getPosition()));
 
         bullet.fly();
     }
