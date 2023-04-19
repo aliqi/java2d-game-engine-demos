@@ -15,6 +15,7 @@ public class Demo {
 
         SpriteGameObject ship = new SpriteGameObject("assets/sprites/spacecraft1.png");
         DestinationTranslator translator = new DestinationTranslator();
+        translator.rotationDelta = 90;
         ship.addComponent(translator);
         scene.add(ship);
 

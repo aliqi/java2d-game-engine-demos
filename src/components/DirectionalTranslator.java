@@ -19,6 +19,8 @@ public class DirectionalTranslator extends GameComponent {
 
     public boolean rotateEnabled = true;
 
+    public double rotationDelta = 0;
+
     private Point2D beginPosition;
 
     public DirectionalTranslator() {
@@ -41,7 +43,7 @@ public class DirectionalTranslator extends GameComponent {
         Transform transform = getGameObject().transform;
 
         if (rotateEnabled)
-            transform.setLocalRotation(Maths.toRotation(direction));
+            transform.setLocalRotation(Maths.toRotation(direction) + rotationDelta);
 
         Point2D movement = Maths.multiple(direction, t);
 

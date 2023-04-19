@@ -19,6 +19,10 @@ public class DestinationTranslator extends GameComponent {
 
     public ReachedEvent reachedEvent;
 
+    public boolean rotateEnabled = true;
+
+    public double rotationDelta = 0;
+
     private boolean moving;
 
     public void begin() {
@@ -43,6 +47,11 @@ public class DestinationTranslator extends GameComponent {
 
                 moving = false;
             } else {
+                if (rotateEnabled) {
+                    Point2D direction = Maths.subtract(destination, position);
+                    transform.setLocalRotation(Maths.toRotation(direction) + rotationDelta);
+                }
+                
                 position = Maths.moveTowards(position, destination,
                         speed * Time.deltaTime * 100);
 
